@@ -49,7 +49,7 @@ class ProductController extends Controller
     {
         $categoryId = $_GET ['id'];
         $subCategories = SubCategory::where('category_id', $categoryId )->get();
-        return respond()->json($subCategories);
+        return response()->json($subCategories);
     }
 
     /**

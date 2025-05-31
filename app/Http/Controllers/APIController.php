@@ -35,7 +35,7 @@ class APIController extends Controller
     }
     public function getProductDetail($id)
     {
-        $product = Product::find($id);
+        $product = Product::with(['productColors.color', 'productSizes.size'])->findOrFail($id);
         $product->image = asset($product->image);
         foreach ($product->productImages as $productImage)
         {

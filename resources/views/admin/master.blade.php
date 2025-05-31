@@ -25,9 +25,6 @@
     <!-- STYLE CSS -->
     <link href="{{asset('/')}}admin/assets/css/style.css" rel="stylesheet" />
     <link href="{{asset('/')}}admin/assets/css/skin-modes.css" rel="stylesheet" />
-
-
-
     <!--- FONT-ICONS CSS -->
     <link href="{{asset('/')}}admin/assets/plugins/icons/icons.css" rel="stylesheet" />
 
@@ -635,18 +632,15 @@
                 type:"GET",
                 url :"{{ route('get-sub-category-by-category') }}",
                 data:{id: categoryId},
-                DataType:"JSON",
+                dataType:"JSON",
                 success : function (response) {
                     var option = '';
                     option += '<option value=""> -- Select Category -- </option>';
                         $.each(response , function (key , value) {
-
                             option += '<option value=" '+value.id+' "> '+value.name+' </option>';
                         });
                         $('#subCategoryId').empty();
                         $('#subCategoryId').append(option);
-
-
                 }
             });
     }
