@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Cart;
 
 class CartController extends Controller
 {
@@ -35,6 +36,17 @@ class CartController extends Controller
         return response()->json([
            'message'=>'Product added to cart successfully',
             'cart_count'=>count($cart),
+        ]);
+    }
+
+    public function index()
+    {
+        $cartItems = Cart::content();
+
+        return response()->json([
+            'cart_items' => $cartItems,
+            'total' => Cart::total(),
+            'count' => Cart::count(),
         ]);
     }
 }
