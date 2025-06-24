@@ -83,7 +83,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"><i class="lni lni-close"></i></button>
-                                </form>
+                            </form>
                         </div>
                     </div>
                 </div>

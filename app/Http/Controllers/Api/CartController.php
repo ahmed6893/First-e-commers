@@ -41,12 +41,16 @@ class CartController extends Controller
 
     public function index()
     {
-        $cartItems = Cart::content();
+        $cart = session()->get('cart', []);
+
+        $total = collect($cart)->sum(function ($item) {
+            return $item['price'] * $item['qty'];
+        });
 
         return response()->json([
-            'cart_items' => $cartItems,
-            'total' => Cart::total(),
-            'count' => Cart::count(),
+            'cart_items' => array_values($cart), 
+            'total' => number_format($total, 2),
+            'count' => count($cart),
         ]);
     }
 }
