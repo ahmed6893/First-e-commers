@@ -19,23 +19,28 @@ class CartController extends Controller
         if (isset($cart[$cartItemId])){
             $cart[$cartItemId]['qty'] += $data['qty'];
         }
-        else{
+        else {
             $cart[$cartItemId] = [
+                'rowId' => $cartItemId,
                 'product_id' => $data['product_id'],
                 'name'=> $data['name'],
                 'price'=>$data['price'],
                 'qty'=>  $data['qty'],
-                'color'=>$data['color'],
-                'size'=> $data['size'],
-                'image'=>$data['image'],
+                'options' => [
+                    'color'=>$data['color'],
+                    'size'=> $data['size'],
+                    'image'=>$data['image'],
+                ]
             ];
         }
 
         session()->put('cart',$cart);
-
+        session()->save();
         return response()->json([
            'message'=>'Product added to cart successfully',
             'cart_count'=>count($cart),
+            'session_id' => session()->getId(),
+            'debug_cart' => $cart
         ]);
     }
 
@@ -48,9 +53,11 @@ class CartController extends Controller
         });
 
         return response()->json([
-            'cart_items' => array_values($cart), 
+            'cart_items' => array_values($cart),
             'total' => number_format($total, 2),
             'count' => count($cart),
+            'session_id' => session()->getId(),
+            'debug_session' => session()->all()
         ]);
     }
 }

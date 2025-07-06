@@ -15,3 +15,4 @@ Route::get('/get-all-CategoryProducts/{id}',[APIController::class,'getAllCategor
 Route::get('/get-product-details/{id}',[APIController::class,'getProductDetail']);
 Route::post('/add-to-cart',[CartController::class,'addToCart']);
 Route::get('/cart', [CartController::class, 'index']);
+ 
