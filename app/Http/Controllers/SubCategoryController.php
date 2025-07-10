@@ -52,7 +52,11 @@ class SubCategoryController extends Controller
      */
     public function edit(String $id)
     {
-        return view('admin.sub-category.edit');
+        return view('admin.sub-category.edit',
+        [
+            'sub_category' => SubCategory::find($id),
+            'category' => Category::all()
+        ]);
     }
 
     /**
@@ -61,7 +65,7 @@ class SubCategoryController extends Controller
     public function update(Request $request, string $id)
     {
         SubCategory::updateSubCategoryInfo($request,$id);
-        return redirect('/product')->with('message','Subcategory Info updated succesfully.');
+        return redirect('/sub-category')->with('message','Subcategory Info updated succesfully.');
     }
 
     /**
